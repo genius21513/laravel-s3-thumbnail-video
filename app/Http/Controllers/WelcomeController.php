@@ -9,17 +9,21 @@ use Illuminate\Support\Facades\Storage;
 class WelcomeController extends Controller
 {
    public function index()
-   {     
-      //  $url = 'https://s3.' . env('AWS_DEFAULT_REGION') . '.amazonaws.com/' . env('AWS_BUCKET') . '/';
-      //  $images = [];       
-      //  $files = Storage::disk('s3')->files();       
-      //      foreach ($files as $file) {
-      //          $images[] = [
-      //              'name' => str_replace('images/', '', $file),
-      //              'src' => $url . $file
-      //          ];
-      //      }
+   {
+       $url = 'https://s3.' . env('AWS_DEFAULT_REGION') . '.amazonaws.com/' . env('AWS_BUCKET') . '/';
+       $images = [];
+      //  $files = Storage::disk('s3')->files();
+       $files = Storage::disk('s3')->allFiles('');
+       dd($files);
+           foreach ($files as $file) {
+               $images[] = [
+                   'name' => str_replace('images/', '', $file),
+                   'src' => $url . $file
+               ];
+           }
+
       
+
       //  return view('welcome', compact('images'));
       return view('welcome');
    }
@@ -27,22 +31,22 @@ class WelcomeController extends Controller
    public function store(Request $request)
    {
        $this->validate($request, [
-           'image' => 'required|image|max:2048'
+           'video' => 'required|mimes:mp4|max:204800'           
        ]);
  
-       if ($request->hasFile('image')) {
-           $file = $request->file('image');
+       if ($request->hasFile('video')) {         
+           $file = $request->file('video');
            $name = time() . $file->getClientOriginalName();
-           $filePath = 'images/' . $name;
+           $filePath = '/' . $name;
            Storage::disk('s3')->put($filePath, file_get_contents($file));
 
-           $image = Image::create([
-            'filename' => basename($filePath),
-            'url' => Storage::disk('s3')->url($filePath)
-        ]);
+        //  $image = Image::create([
+        //     'filename' => basename($filePath),
+        //     'url' => Storage::disk('s3')->url($filePath)
+        // ]);
        }
  
-       return back()->withSuccess('Image uploaded successfully');
+       return back()->withSuccess('Video uploaded successfully');
    }
  
    public function destroy($image)

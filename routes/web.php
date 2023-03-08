@@ -18,4 +18,4 @@ Route::post('/test', 'ImageController@store');
 Route::get('/test/{image}', 'ImageController@show');
 
 Route::get('/', 'WelcomeController@index');
-Route::resource('images', 'WelcomeController', ['only' => ['store', 'destroy']]);
+Route::resource('videos', 'WelcomeController', ['only' => ['store', 'destroy']]);

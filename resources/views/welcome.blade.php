@@ -22,10 +22,10 @@
         <div class="collapse navbar-collapse" id="navbarNav">
           <ul class="navbar-nav">
             <li class="nav-item active">
-              <a class="nav-link" href="/">Method 1 <span class="sr-only">(current)</span></a>
+              <a class="nav-link" href="/">Upload Video to S3<span class="sr-only">(current)</span></a>
             </li>
             <li class="nav-item">
-              <a class="nav-link" href="/test">Method 2</a>
+              <a class="nav-link" href="/test">#2</a>
             </li>
           </ul>
         </div>
@@ -50,43 +50,13 @@
                            <p>{{ Session::get('success') }}</p>
                        </div>
                    @endif
-               </div>
-               <div class="col-sm-8">
-                   <!-- @if (count($images) > 0)
-                       <div id="carouselExampleControls" class="carousel slide" data-ride="carousel">
-                           <div class="carousel-inner">
-                               @foreach ($images as $image)
-                                   <div class="carousel-item {{ $loop->first ? 'active' : '' }}">
-                                       <img class="d-block w-100" src="{{ $image['src'] }}" alt="Picture">
-                                       <div class="carousel-caption">
-                                           <form action="{{ url('images/' . $image['name']) }}" method="POST">
-                                               {{ csrf_field() }}
-                                               {{ method_field('DELETE') }}
-                                               <button type="submit" class="btn btn-default">Remove</button>
-                                           </form>
-                                       </div>
-                                   </div>
-                               @endforeach
-                           </div>
-                           <a class="carousel-control-prev" href="#carouselExampleControls" role="button" data-slide="prev">
-                               <span class="carousel-control-prev-icon" aria-hidden="true"></span>
-                               <span class="sr-only">Previous</span>
-                           </a>
-                           <a class="carousel-control-next" href="#carouselExampleControls" role="button" data-slide="next">
-                               <span class="carousel-control-next-icon" aria-hidden="true"></span>
-                               <span class="sr-only">Next</span>
-                           </a>
-                       </div>
-                   @else
-                       <p>Nothing found</p>
-                   @endif -->
-               </div>
+               </div>               
                <div class="col-sm-4">
                    <div class="card border-0 text-center">
-                       <form action="{{ url('/images') }}" method="POST" enctype="multipart/form-data" class="form-horizontal">
+                       <form action="{{ url('/videos') }}" method="POST" enctype="multipart/form-data" class="form-horizontal">
                            {{ csrf_field() }}
                            <div class="form-group">
-                               <input type="file" name="image" id="image">
+                               <input type="file" name="video" id="video">
                            </div>
                            <div class="form-group">
                                <button type="submit" class="btn btn-primary">Upload</button>
