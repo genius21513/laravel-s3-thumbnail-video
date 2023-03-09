@@ -51,6 +51,19 @@
                        </div>
                    @endif
                </div>               
+
+               <div class="col-sm-8">
+                   @if (count($images) > 0)
+                   <div class="row">
+                     @foreach ($images as $image)
+                      <h4>{{$image['name']}}------------{{$image['src']}}</h4>                      
+                     @endforeach                    
+                   </div>                       
+                   @else
+                       <p>Nothing found</p>
+                   @endif
+               </div>
+
                <div class="col-sm-4">
                    <div class="card border-0 text-center">
                        <form action="{{ url('/videos') }}" method="POST" enctype="multipart/form-data" class="form-horizontal">

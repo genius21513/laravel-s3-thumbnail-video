@@ -10,22 +10,21 @@ class WelcomeController extends Controller
 {
    public function index()
    {
-       $url = 'https://s3.' . env('AWS_DEFAULT_REGION') . '.amazonaws.com/' . env('AWS_BUCKET') . '/';
+       $url = 'https://s3.' . env('AWS_DEFAULT_REGION') . '.amazonaws.com/' . env('AWS_BUCKET');
        $images = [];
-      //  $files = Storage::disk('s3')->files();
-       $files = Storage::disk('s3')->allFiles('');
-       dd($files);
+       $files = Storage::disk('s3')->files();      
            foreach ($files as $file) {
                $images[] = [
-                   'name' => str_replace('images/', '', $file),
+                  //  'name' => str_replace('/', '', $file),
+                   'name' => $file,
                    'src' => $url . $file
                ];
            }
 
       
 
-      //  return view('welcome', compact('images'));
-      return view('welcome');
+       return view('welcome', compact('images'));
+      // return view('welcome');
    }
  
    public function store(Request $request)
